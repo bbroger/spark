@@ -1,16 +1,22 @@
 {
-    "name": "ashuradev/spark",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ashura",
-            "email": "the.lucas2016@gmail.com"
-        }
-    ],
-    "require": {
-        "illuminate/database": "^6.8",
-        "slim/slim": "^4.3",
-        "vlucas/phpdotenv": "^4.1"
+  "name": "ashuradev/spark",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ashura",
+      "email": "the.lucas2016@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {
+    "illuminate/database": "^6.8",
+    "slim/slim": "^4.3",
+    "vlucas/phpdotenv": "^4.1",
+    "slim/psr7": "^1.0"
+  }
 }
