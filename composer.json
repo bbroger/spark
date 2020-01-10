@@ -17,6 +17,8 @@
     "illuminate/database": "^6.8",
     "slim/slim": "^4.3",
     "vlucas/phpdotenv": "^4.1",
-    "slim/psr7": "^1.0"
+    "slim/psr7": "^1.0",
+    "php-di/php-di": "^6.0",
+    "middlewares/trailing-slash": "^2.0"
   }
 }
