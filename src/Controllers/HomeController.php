@@ -9,9 +9,6 @@ class HomeController
 {
     public function index(Request $request, Response $response): Response
     {
-        echo 'eae';
-        sleep(5);
-
         $response->getBody()->write('Olá, mundo!');
 
         return $response;
