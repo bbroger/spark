@@ -37,7 +37,6 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware());
 $app->add(new TrailingSlash(true));
-$app->addErrorMiddleware(true, true, true);
 
 if (ENVIRONMENT === ENV_DEVELOPMENT) $app->add(new WhoopsMiddleware());
 

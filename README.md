@@ -1,13 +1,14 @@
 # spark
 
-Skeleton para projetos fullstack, rápidos e sem muita complexidade utilizando Slim.
+Skeleton para projetos pequenos, rápidos e sem muita complexidade que utiliza Slim. Para projetos mais grandes, você deve utilizar frameworks como Laravel e Symfony.
 
 # Tarefas
 
+- [x] Adicionar um visualizador de erros básico
+- [x] Adicionar PHP-DI
 - [ ] Adicionar Slim/Http
-- [ ] Adicionar PHP-DI
 - [ ] Adicionar phpdotenv
 - [ ] Adicionar Twig
 - [ ] Adicionar Eloquent
 - [ ] Adicionar proteção contra CSRF
-- [ ] Adicionar um manipulador de erros
+- [ ] Trabalhar na visualização de erros
