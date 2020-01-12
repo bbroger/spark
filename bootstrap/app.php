@@ -38,7 +38,9 @@ $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware());
 $app->add(new TrailingSlash(true));
 
-if (ENVIRONMENT === ENV_DEVELOPMENT) $app->add(new WhoopsMiddleware());
+if (ENVIRONMENT === ENV_DEVELOPMENT) {
+    $app->add(new WhoopsMiddleware());
+}
 
 /**
  * Boot the Eloquent ORM.
