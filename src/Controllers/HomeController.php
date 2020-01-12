@@ -2,15 +2,13 @@
 
 namespace App\Controllers;
 
-use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 
 class HomeController
 {
-    public function index(Request $request, Response $response): Response
+    public function index(Response $response, Twig $twig): Response
     {
-        $response->getBody()->write('Olá, mundo!');
-
-        return $response;
+        return $twig->render($response, 'welcome.html.twig');
     }
 }

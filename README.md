@@ -7,8 +7,8 @@ Skeleton para projetos pequenos, rápidos e sem muita complexidade que utiliza S
 - [x] Adicionar um visualizador de erros básico
 - [x] Adicionar PHP-DI
 - [x] Adicionar Slim/Http
-- [ ] Adicionar phpdotenv
-- [ ] Adicionar Twig
-- [ ] Adicionar Eloquent
+- [x] Adicionar phpdotenv
+- [x] Adicionar Twig
+- [x] Adicionar Eloquent
 - [ ] Adicionar proteção contra CSRF
 - [ ] Trabalhar na visualização de erros

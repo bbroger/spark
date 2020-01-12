@@ -7,13 +7,17 @@ use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
+use Slim\Views\TwigMiddleware;
+use Slim\Views\Twig;
 
 Dotenv::createImmutable(__DIR__ . '/..')->load();
 
 define('ENVIRONMENT', env_get('APP_ENVIRONMENT', 'production'));
 
 $builder = new ContainerBuilder();
+
 $builder->addDefinitions(__DIR__ . '/../config/dependencies.php');
+
 $container = $builder->build();
 
 $app = Bridge::create($container);
@@ -22,6 +26,7 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware());
 $app->add(new TrailingSlash(true));
+$app->add(TwigMiddleware::createFromContainer($app, Twig::class));
 
 if (ENVIRONMENT === ENV_DEVELOPMENT) {
     $app->add(new WhoopsMiddleware());
