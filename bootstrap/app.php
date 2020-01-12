@@ -8,31 +8,16 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
-/**
- * Load the environment variables.
- */
 Dotenv::createImmutable(__DIR__ . '/..')->load();
 
-/**
- * Adds environment constant.
- */
 define('ENVIRONMENT', env_get('APP_ENVIRONMENT', 'production'));
 
-/**
- * Load the dependency injection container.
- */
 $builder = new ContainerBuilder();
 $builder->addDefinitions(__DIR__ . '/../config/dependencies.php');
 $container = $builder->build();
 
-/**
- * Create the Slim application with the PHP-DI bridge.
- */
 $app = Bridge::create($container);
 
-/**
- * Add global middlewares.
- */
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware());
@@ -40,11 +25,10 @@ $app->add(new TrailingSlash(true));
 
 if (ENVIRONMENT === ENV_DEVELOPMENT) {
     $app->add(new WhoopsMiddleware());
+} else {
+    $app->add(false, true, true);
 }
 
-/**
- * Boot the Eloquent ORM.
- */
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -61,9 +45,6 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-/**
- * Register routes.
- */
 require __DIR__ . '/../routes/web.php';
 
 return $app;
