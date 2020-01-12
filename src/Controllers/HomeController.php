@@ -9,6 +9,8 @@ class HomeController
 {
     public function index(Request $request, Response $response): Response
     {
+        throw new Exception('kk');
+
         $response->getBody()->write('Olá, mundo!');
 
         return $response;

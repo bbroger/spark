@@ -6,11 +6,17 @@ use Slim\Middleware\MethodOverrideMiddleware;
 use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
+use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 /**
  * Load the environment variables.
  */
 Dotenv::createImmutable(__DIR__ . '/..')->load();
+
+/**
+ * Adds environment constant.
+ */
+define('ENVIRONMENT', env_get('APP_ENVIRONMENT', 'production'));
 
 /**
  * Load the dependency injection container.
@@ -31,12 +37,9 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware());
 $app->add(new TrailingSlash(true));
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$app->addErrorMiddleware(true, true, true);
 
-/**
- * Add error handler.
- */
-
+if (ENVIRONMENT === ENV_DEVELOPMENT) $app->add(new WhoopsMiddleware());
 
 /**
  * Boot the Eloquent ORM.
