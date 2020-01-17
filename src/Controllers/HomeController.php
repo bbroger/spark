@@ -9,6 +9,6 @@ class HomeController
 {
     public function index(Response $response, Twig $twig): Response
     {
-        return $twig->render($response, 'welcome.html.twig');
+        return $twig->render($response, 'welcome.twig');
     }
 }
