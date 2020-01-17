@@ -11,7 +11,7 @@ Skeleton para projetos pequenos, rápidos e sem muita complexidade que utiliza S
 - [x] Adicionar Twig
 - [x] Adicionar Eloquent
 - [x] Decidir se vai trocar de container
-- [ ] Migrations
+- [x] Adicionar um SCM de migrations
 - [ ] Adicionar proteção contra CSRF
 - [ ] Adicionar um validador de dados
 - [ ] Trabalhar na visualização de erros
