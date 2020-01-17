@@ -3,6 +3,6 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 /** @var \Slim\App $app */
-$app = require __DIR__ . '/../bootstrap/app.php';
+$app = require PATH_BOOTSTRAP . '/app.php';
 
 $app->run();

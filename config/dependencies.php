@@ -3,7 +3,12 @@
 use Slim\Views\Twig;
 
 return [
-    Twig::class => function () {
-        return Twig::create(__DIR__ . '/../resources/views');
+    Twig::class => function (): Twig {
+        return Twig::create(
+            PATH_VIEWS,
+            env_get('TWIG_CACHE_ENABLED', true)
+                ? ['cache' => PATH_CACHE]
+                : []
+        );
     }
 ];

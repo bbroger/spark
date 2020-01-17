@@ -9,13 +9,12 @@ use Dotenv\Dotenv;
 use Slim\Views\TwigMiddleware;
 use Slim\Views\Twig;
 
-Dotenv::createImmutable(__DIR__ . '/..')->load();
+Dotenv::createImmutable(PATH_ROOT)->load();
 
-$builder = new ContainerBuilder();
-$builder->addDefinitions(__DIR__ . '/../config/dependencies.php');
+$builder = (new ContainerBuilder())
+    ->addDefinitions(PATH_CONFIG . '/dependencies.php');
 
 $app = Bridge::create($builder->build());
-
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
@@ -24,7 +23,6 @@ $app->add(new MethodOverrideMiddleware())
     ->add(TwigMiddleware::createFromContainer($app, Twig::class));
 
 $capsule = new Capsule;
-
 $capsule->addConnection([
     'driver'    => env_get('DB_DRIVER', 'mysql'),
     'host'      => env_get('DB_HOST', 'localhost'),
@@ -39,6 +37,6 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-require __DIR__ . '/../routes/web.php';
+require PATH_ROUTES . '/web.php';
 
 return $app;
