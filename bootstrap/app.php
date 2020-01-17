@@ -18,10 +18,10 @@ $app = Bridge::create($builder->build());
 
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
-$app->add(new MethodOverrideMiddleware());
-$app->add(new TrailingSlash(true));
-$app->add(TwigMiddleware::createFromContainer($app, Twig::class));
 $app->addErrorMiddleware(true, true, true);
+$app->add(new MethodOverrideMiddleware())
+    ->add(new TrailingSlash(true))
+    ->add(TwigMiddleware::createFromContainer($app, Twig::class));
 
 $capsule = new Capsule;
 
