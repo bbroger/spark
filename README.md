@@ -1,6 +1,6 @@
 # spark
 
-Skeleton para projetos pequenos, rápidos e sem muita complexidade que utiliza Slim. Para projetos mais grandes, você deve utilizar frameworks como Laravel e Symfony.
+Skeleton simples para projetos pequenos, simples e sem complexidade. Para projetos mais grandes, você deve utilizar frameworks como Laravel e Symfony.
 
 # Tarefas
 
