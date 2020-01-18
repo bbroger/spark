@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 use Slim\Middleware\MethodOverrideMiddleware;
 use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -10,6 +8,8 @@ use Slim\Views\TwigMiddleware;
 use Pimple\Container;
 use Pimple\Psr11\Container as Psr11Container;
 use Slim\Factory\AppFactory;
+
+session_start();
 
 /**
  * Load the environment variables.
