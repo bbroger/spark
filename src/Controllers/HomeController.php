@@ -7,7 +7,7 @@ use Slim\Views\Twig;
 
 class HomeController
 {
-    public function index(Response $response, Twig $twig): Response
+    public function index(Response $response, Twig $twig)
     {
         return $twig->render($response, 'welcome.twig');
     }

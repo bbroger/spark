@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
 use Slim\Middleware\MethodOverrideMiddleware;
@@ -8,19 +10,22 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
 use Slim\Views\TwigMiddleware;
 use Slim\Views\Twig;
+use Slim\Csrf\Guard;
 
 Dotenv::createImmutable(PATH_ROOT)->load();
 
 $builder = (new ContainerBuilder())
     ->addDefinitions(PATH_CONFIG . '/dependencies.php');
+$container = $builder->build();
 
-$app = Bridge::create($builder->build());
+$app = Bridge::create($container);
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 $app->add(new MethodOverrideMiddleware())
     ->add(new TrailingSlash(true))
-    ->add(TwigMiddleware::createFromContainer($app, Twig::class));
+    ->add(TwigMiddleware::createFromContainer($app, Twig::class))
+    ->add($container->get(Guard::class));
 
 $capsule = new Capsule;
 $capsule->addConnection([
