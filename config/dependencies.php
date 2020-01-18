@@ -2,10 +2,9 @@
 
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
-use Slim\App;
 
 return [
-    Twig::class => function () {
+    'view' => function () {
         return Twig::create(
             PATH_VIEWS,
             env_get('TWIG_CACHE_ENABLED', true)
@@ -14,7 +13,7 @@ return [
         );
     },
 
-    Guard::class => function (App $app) {
-        return new Guard($app->getResponseFactory());
+    'csrf' => function ($c) {
+        return new Guard($c['app']->getResponseFactory());
     }
 ];

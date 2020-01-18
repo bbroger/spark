@@ -7,23 +7,44 @@ use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
 use Slim\Views\TwigMiddleware;
-use Slim\Views\Twig;
-use Slim\Csrf\Guard;
-use Pimple\Psr11\Container;
+use Pimple\Container;
+use Pimple\Psr11\Container as Psr11Container;
+use Slim\Factory\AppFactory;
 
+/**
+ * Load the environment variables.
+ */
 Dotenv::createImmutable(PATH_ROOT)->load();
 
-$container = new Container();
+/**
+ * Create the DI container.
+ */
+$container = new Container(require __DIR__ . '/../config/dependencies.php');
 
-$app = Bridge::create($container);
-$app->addBodyParsingMiddleware();
+/**
+ * Create the app.
+ */
+AppFactory::setContainer(new Psr11Container($container));
+$app = AppFactory::create();
+
+/**
+ * Register the app on container.
+ */
+$container['app'] = $app;
+
+/**
+ * Register app middlewares.
+ */
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 $app->add(new MethodOverrideMiddleware())
     ->add(new TrailingSlash(true))
-    ->add(TwigMiddleware::createFromContainer($app, Twig::class))
-    ->add($container->get(Guard::class));
+    ->add(TwigMiddleware::createFromContainer($app))
+    ->add($container['csrf']);
 
+/**
+ * Boot the Eloquent ORM.
+ */
 $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => env_get('DB_DRIVER', 'mysql'),
@@ -39,6 +60,12 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+/**
+ * Register the routes.
+ */
 require PATH_ROUTES . '/web.php';
 
+/**
+ * Return app to front controller.
+ */
 return $app;
