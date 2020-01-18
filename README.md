@@ -12,6 +12,6 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 - [x] Adicionar Eloquent
 - [x] Decidir se vai trocar de container
 - [x] Adicionar um SCM de migrations
-- [ ] Adicionar proteção contra CSRF
+- [x] Adicionar proteção contra CSRF
 - [ ] Adicionar um validador de dados
 - [ ] Trabalhar na visualização de erros
