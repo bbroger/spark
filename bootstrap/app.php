@@ -19,7 +19,7 @@ Dotenv::createImmutable(PATH_ROOT)->load();
 /**
  * Create the DI container.
  */
-$container = new Container(require __DIR__ . '/../config/dependencies.php');
+$container = new Container(require PATH_CONFIG . '/services.php');
 
 /**
  * Create the app.

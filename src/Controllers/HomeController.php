@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use Slim\Http\Response;
-use Slim\Http\Request;
-use Slim\Views\Twig;
+use Slim\Http\ServerRequest;
 
 class HomeController extends Controller
 {
-    public function index(Request $request, Response $request)
+    public function index(ServerRequest $request, Response $response)
     {
         return $this->view->render($response, 'welcome.twig');
     }
