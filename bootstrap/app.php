@@ -2,8 +2,6 @@
 
 session_start();
 
-use DI\Bridge\Slim\Bridge;
-use DI\ContainerBuilder;
 use Slim\Middleware\MethodOverrideMiddleware;
 use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -11,12 +9,11 @@ use Dotenv\Dotenv;
 use Slim\Views\TwigMiddleware;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
+use Pimple\Psr11\Container;
 
 Dotenv::createImmutable(PATH_ROOT)->load();
 
-$builder = (new ContainerBuilder())
-    ->addDefinitions(PATH_CONFIG . '/dependencies.php');
-$container = $builder->build();
+$container = new Container();
 
 $app = Bridge::create($container);
 $app->addBodyParsingMiddleware();
