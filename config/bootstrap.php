@@ -62,8 +62,7 @@ $capsule->bootEloquent();
 
 /**
  * Register the routes.
- */
-require PATH_ROUTES . '/web.php';
+ */ (require PATH_CONFIG . '/routes.php')($app);
 
 /**
  * Return app to front controller.
