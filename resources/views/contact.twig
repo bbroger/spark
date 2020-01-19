@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Spark - Contato</title>
+	</head>
+	<body>
+		<form method="POST">
+			<input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+			<input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
+
+			<input type="text" name="name" placeholder="Seu nome" value="{{ old('name') }}"/>
+			<textarea name="message">
+				Sua mensagem...
+			</textarea>
+			{{ error('name') }}
+			<button type="submit">
+				Enviar
+			</button>
+		</form>
+	</body>
+</html>

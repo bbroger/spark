@@ -13,5 +13,5 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 - [x] Decidir se vai trocar de container
 - [x] Adicionar um SCM de migrations
 - [x] Adicionar proteção contra CSRF
-- [ ] Adicionar um validador de dados
+- [x] Adicionar um validador de dados
 - [ ] Trabalhar na visualização de erros

@@ -7,7 +7,10 @@ use Slim\Http\ServerRequest;
 
 class HomeController extends Controller
 {
-    public function index(ServerRequest $request, Response $response)
+    /**
+     * Show index page.
+     */
+    public function index(ServerRequest $request, Response $response): Response
     {
         return $this->view->render($response, 'welcome.twig');
     }
