@@ -5,6 +5,7 @@ namespace App\Twig;
 use Slim\Csrf\Guard;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
+use Twig\TwigFunction;
 
 class CsrfExtension extends AbstractExtension implements GlobalsInterface
 {
@@ -35,5 +36,29 @@ class CsrfExtension extends AbstractExtension implements GlobalsInterface
                 'value' => $csrfValue
             ]
         ];
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction(
+                'csrf_token',
+                [$this, 'getCsrfToken'],
+                ['is_safe' => ['html']]
+            )
+        ];
+    }
+
+    public function getCsrfToken()
+    {
+        $nameKey = $this->csrf->getTokenNameKey();
+        $valueKey = $this->csrf->getTokenValueKey();
+        $name = $this->csrf->getTokenName();
+        $value = $this->csrf->getTokenValue();
+
+        return "
+            <input type=\"hidden\" name=\"$nameKey\" value=\"$name\">
+            <input type=\"hidden\" name=\"$valueKey\" value=\"$value\">
+        ";
     }
 }

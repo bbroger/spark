@@ -8,8 +8,7 @@
 	</head>
 	<body>
 		<form method="POST">
-			<input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
-			<input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
+			{{ csrf_token() }}
 
 			<input type="text" name="name" placeholder="Seu nome" value="{{ old('name') }}"/>
 			<textarea name="message">
