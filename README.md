@@ -14,4 +14,4 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 - [x] Adicionar um SCM de migrations
 - [x] Adicionar proteção contra CSRF
 - [x] Adicionar um validador de dados
-- [ ] Trabalhar na visualização de erros
+- [x] Trabalhar na visualização de erros

@@ -5,6 +5,7 @@ use App\Twig\FormExtension;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
 use Slim\Factory\ServerRequestCreatorFactory;
+use App\Handlers\ErrorHandler;
 
 return [
     'request' => function () {
@@ -37,4 +38,12 @@ return [
 
         return $view;
     },
+
+    'errorHandler' => function ($c) {
+        return new ErrorHandler(
+            $c['app']->getCallableResolver(),
+            $c['app']->getResponseFactory(),
+            $c['view']
+        );
+    }
 ];

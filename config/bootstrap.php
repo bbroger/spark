@@ -17,6 +17,11 @@ session_start();
 Dotenv::createImmutable(PATH_ROOT)->load();
 
 /**
+ * Load the app environment.
+ */
+define('ENVIRONMENT', env_get('APP_ENVIRONMENT'));
+
+/**
  * Create the DI container.
  */
 $container = new Container(require PATH_CONFIG . '/services.php');
@@ -36,11 +41,21 @@ $container['app'] = $app;
  * Register app middlewares.
  */
 $app->addRoutingMiddleware();
-$app->addErrorMiddleware(true, true, true);
 $app->add(new MethodOverrideMiddleware())
     ->add(new TrailingSlash(true))
     ->add(TwigMiddleware::createFromContainer($app))
     ->add($container['csrf']);
+
+/**
+ * Add error handling.
+ */
+$errorMiddleware = $app->addErrorMiddleware(
+    ENVIRONMENT == ENV_DEVELOPMENT,
+    true,
+    true
+);
+
+$errorMiddleware->setDefaultErrorHandler($container['errorHandler']);
 
 /**
  * Boot the Eloquent ORM.
