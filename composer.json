@@ -28,7 +28,9 @@
     "slim/twig-view": "^3.0",
     "slim/csrf": "^1.0",
     "pimple/pimple": "^3.2",
-    "awurth/slim-validation": "^3.2"
+    "awurth/slim-validation": "^3.2",
+    "odan/session": "^4.0",
+    "slim/flash": "^0.4.0"
   },
   "require-dev": {
     "symfony/var-dumper": "^5.0"

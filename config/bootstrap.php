@@ -9,8 +9,6 @@ use Pimple\Container;
 use Pimple\Psr11\Container as Psr11Container;
 use Slim\Factory\AppFactory;
 
-session_start();
-
 /**
  * Load the environment variables.
  */
@@ -24,7 +22,7 @@ define('ENVIRONMENT', env_get('APP_ENVIRONMENT'));
 /**
  * Create the DI container.
  */
-$container = new Container(require PATH_CONFIG . '/services.php');
+$container = new Container();
 
 /**
  * Create the app.
@@ -33,9 +31,15 @@ AppFactory::setContainer(new Psr11Container($container));
 $app = AppFactory::create();
 
 /**
- * Register the app on container.
+ * Load container dependencies.
  */
-$container['app'] = $app;
+(require PATH_CONFIG . '/services.php')($container, $app);
+
+/**
+ * Load the session.
+ */
+$session = $container['session'];
+$session->start();
 
 /**
  * Register app middlewares.
@@ -43,8 +47,8 @@ $container['app'] = $app;
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware())
     ->add(new TrailingSlash(true))
-    ->add(TwigMiddleware::createFromContainer($app))
-    ->add($container['csrf']);
+    ->add($container['csrf'])
+    ->add(TwigMiddleware::createFromContainer($app));
 
 /**
  * Add error handling.
@@ -77,7 +81,8 @@ $capsule->bootEloquent();
 
 /**
  * Register the routes.
- */ (require PATH_CONFIG . '/routes.php')($app);
+ */ 
+(require PATH_CONFIG . '/routes.php')($app);
 
 /**
  * Return app to front controller.
