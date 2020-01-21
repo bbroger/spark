@@ -3,6 +3,9 @@
 return [
     'showValidationRules' => true,
 
+    /**
+     * Default messages.
+     */
     'messages' => [
         'notBlank' => 'O campo {{name}} é obrigatório.',
         'notEmpty' => 'O campo {{name}} é obrigatório.',

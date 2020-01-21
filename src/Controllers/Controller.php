@@ -32,12 +32,13 @@ class Controller
      *      'body' => 'O corpo precisa ser preenchido e ser numérico!'
      *  ]);
      * 
+     * @see config/validation.php
      * @see https://github.com/awurth/SlimValidation
      */
     public function validate(
         $input, 
         $rules, 
-        $messages = [],
+        $messages = [], /* Custom messages */
         $group = null, 
         $default = []
     )
@@ -48,8 +49,6 @@ class Controller
 
         if (! $validator->isValid()) {
             $errors = $validator->getErrors();
-
-            dd($errors);
 
             $this->flash->withErrors($errors)
                 ->withInputs($validator->getValues());

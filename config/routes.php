@@ -1,13 +1,15 @@
 <?php
 
-use App\Controllers\ContactController;
+use App\Controllers\ExampleController;
 use App\Controllers\HomeController;
 
 return function ($app) {
     $app->get('/', HomeController::class . ':index');
 
-    $app->group('/contact', function ($group) {
-        $group->get('/', ContactController::class . ':index');
-        $group->post('/', ContactController::class . ':store');
-    });
+    if (ENVIRONMENT === ENV_DEVELOPMENT) {
+        $app->group('/example', function ($group) {
+            $group->get('/', ExampleController::class . ':index');
+            $group->post('/', ExampleController::class . ':store');
+        });
+    }
 };

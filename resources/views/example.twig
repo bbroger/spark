@@ -1,8 +1,15 @@
 <form method="POST">
 	{{ csrf_token() }}
+
 	<input type="text" name="name" value="{{ old('name') }}">
 	{{ error('name') }}
-	<input type="text" name="body" value="{{ old('teste') }}">
-	{{ error('body') }}
+
+	<br/>
+
+	<input type="text" name="subject" value="{{ old('subject') }}">
+	{{ error('subject') }}
+
+	<br/>
+
 	<input type="submit"/>
 </form>
