@@ -14,8 +14,8 @@ class ContactController extends Controller
     public function store($request, $response)
     {
         $this->validate($request, [
-            'name' => v::notBlank()->setName('Nome'),
-            'body' => v::notBlank()->setName('Corpo')
+            'name' => v::notBlank(),
+            'body' => v::notBlank()
         ]);
 
         return $response;

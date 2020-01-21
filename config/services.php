@@ -8,7 +8,7 @@ use App\Handlers\ErrorHandler;
 use App\Session\Flash;
 use App\Twig\SessionExtension;
 use Odan\Session\PhpSession;
-use Awurth\SlimValidation\Validator;
+use App\Validation\Validator;
 
 return function ($container, $app) {
     $container['app'] = $app;
@@ -23,7 +23,13 @@ return function ($container, $app) {
     };
 
     $container['validator'] = function () {
-        return new Validator;
+        $config = require_once PATH_CONFIG . '/validation.php';
+
+        return new Validator(
+            $config['showValidationRules'],
+            $config['messages'],
+            $config['attributes']
+        );
     };
 
     $container['view'] = function ($c) {

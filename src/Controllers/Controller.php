@@ -34,6 +34,8 @@ class Controller
         if (! $validator->isValid()) {
             $errors = $validator->getErrors();
 
+            dd($errors);
+
             $this->flash->withErrors($errors)
                 ->withInputs($validator->getValues());
 
