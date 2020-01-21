@@ -1,14 +1,14 @@
 <?php
 
 use App\Twig\CsrfExtension;
-use App\Twig\FormExtension;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
 use Slim\Factory\ServerRequestCreatorFactory;
 use App\Handlers\ErrorHandler;
+use App\Session\Flash;
 use App\Twig\SessionExtension;
 use Odan\Session\PhpSession;
-use Slim\Flash\Messages;
+use Awurth\SlimValidation\Validator;
 
 return function ($container, $app) {
     $container['app'] = $app;
@@ -23,7 +23,7 @@ return function ($container, $app) {
     };
 
     $container['validator'] = function () {
-        return new Awurth\SlimValidation\Validator;
+        return new Validator;
     };
 
     $container['view'] = function ($c) {
@@ -37,7 +37,6 @@ return function ($container, $app) {
         $view->addExtension(new Awurth\SlimValidation\ValidatorExtension(
             $c['validator']
         ));
-        $view->addExtension(new FormExtension($c['request']));
         $view->addExtension(new SessionExtension($c['session'], $c['flash']));
 
         return $view;
@@ -68,6 +67,6 @@ return function ($container, $app) {
     };
 
     $container['flash'] = function () {
-        return new Messages;
+        return new Flash;
     };
 };

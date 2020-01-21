@@ -38,8 +38,7 @@ $app = AppFactory::create();
 /**
  * Load the session.
  */
-$session = $container['session'];
-$session->start();
+$container['session']->start();
 
 /**
  * Register app middlewares.
