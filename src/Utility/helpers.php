@@ -1,12 +1,7 @@
 <?php
 
-/**
- * Gets the value of a environment variable.
- * 
- * @param string $var
- * @param mixed $default
- * @return mixed
- */
+use Illuminate\Support\Str;
+
 function env_get($var, $default = '')
 {
     $value = getenv($var) ?? $default;
@@ -20,4 +15,17 @@ function env_get($var, $default = '')
     }
 
     return $value;
+}
+
+function expand(&$array)
+{
+    foreach ($array as $key => $value) {
+        data_set($array, $key, $value);
+
+        if (Str::contains($key, '.')) {
+            unset($array[$key]);
+        }
+    }
+
+    return $array;
 }

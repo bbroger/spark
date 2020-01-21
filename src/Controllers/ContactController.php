@@ -15,7 +15,9 @@ class ContactController extends Controller
     {
         $this->validate($request, [
             'name' => v::notBlank(),
-            'body' => v::notBlank()
+            'body' => v::notBlank()->numeric()
+        ], [
+            'name.notBlank' => 'Preencha o campo nome',
         ]);
 
         return $response;

@@ -19,6 +19,21 @@ class Controller
         return $this->container->get($property);
     }
 
+    /**
+     * Validate an given input.
+     * 
+     * Example:
+     * 
+     *  $this->validate($request, [
+     *      'name' => v::notBlank(),
+     *      'body' => v::notBlank()->numeric()
+     *  ], [
+     *      'name.notBlank' => 'A mensagem para a regra notBlank do name',
+     *      'body' => 'O corpo precisa ser preenchido e ser numérico!'
+     *  ]);
+     * 
+     * @see https://github.com/awurth/SlimValidation
+     */
     public function validate(
         $input, 
         $rules, 
