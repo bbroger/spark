@@ -1,12 +1,12 @@
 <?php
 
-use App\Twig\CsrfExtension;
+use App\Extensions\CsrfExtension;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
 use Slim\Factory\ServerRequestCreatorFactory;
 use App\Handlers\ErrorHandler;
 use App\Session\Flash;
-use App\Twig\SessionExtension;
+use App\Extensions\SessionExtension;
 use Odan\Session\PhpSession;
 use App\Validation\Validator;
 

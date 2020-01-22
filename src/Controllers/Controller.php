@@ -19,6 +19,11 @@ class Controller
         return $this->container->get($property);
     }
 
+    public function render($response, $path)
+    {
+        return $this->view->render($response, $path);
+    }
+
     /**
      * Validate an given input.
      * 
