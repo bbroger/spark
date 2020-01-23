@@ -45,7 +45,7 @@ $container['session']->start();
  */
 $app->addRoutingMiddleware();
 $app->add(new MethodOverrideMiddleware())
-    ->add(new TrailingSlash(true))
+    ->add(new TrailingSlash(false))
     ->add($container['csrf'])
     ->add(TwigMiddleware::createFromContainer($app));
 

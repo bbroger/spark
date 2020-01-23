@@ -4,5 +4,4 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 
 # Tarefas
 
-- [ ] Escolher um template para o painel
-- [ ] Crias as migrations & models.
+- [ ] Instalar o Laravel Mix
