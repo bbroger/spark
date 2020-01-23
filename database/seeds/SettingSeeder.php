@@ -23,6 +23,10 @@ class SettingSeeder extends AbstractSeed
             [
                 'name' => 'app.url',
                 'value' => 'http://localhost:8000'
+            ],
+            [
+                'name' => 'font-awesome.kit',
+                'value' => ''
             ]
         ];
 
