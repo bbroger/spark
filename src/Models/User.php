@@ -2,4 +2,9 @@
 
 namespace App\Controllers;
 
-class W
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    protected $fillable = ['name', 'password', 'email', 'type'];
+}

@@ -33,7 +33,7 @@ $app = AppFactory::create();
 /**
  * Load container dependencies.
  */
-(require PATH_CONFIG . '/services.php')($container, $app);
+require PATH_CONFIG . '/services.php';
 
 /**
  * Load the session.
@@ -81,7 +81,7 @@ $capsule->bootEloquent();
 /**
  * Register the routes.
  */ 
-(require PATH_CONFIG . '/routes.php')($app);
+require PATH_CONFIG . '/routes.php';
 
 /**
  * Return app to front controller.

@@ -4,6 +4,12 @@ if (!defined('DS'))
     define('DS', DIRECTORY_SEPARATOR);
 
 /**
+ * Folders
+ */
+define('FOLDER_CSS', '/css');
+define('FOLDER_JS', '/js');
+
+/**
  * Paths.
  */
 define('PATH_ROOT', dirname(__DIR__));
@@ -16,6 +22,8 @@ define('PATH_STORAGE', PATH_ROOT . '/storage');
 define('PATH_CONFIG', PATH_ROOT . '/config');
 define('PATH_VIEWS', PATH_RESOURCES . '/views');
 define('PATH_CACHE', PATH_STORAGE . '/cache');
+define('PATH_CSS', PATH_WEBROOT . FOLDER_CSS);
+define('PATH_JS', PATH_WEBROOT . FOLDER_JS);
 
 /**
  * Environment types.

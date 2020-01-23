@@ -1,8 +1,9 @@
 <?php
 
+
 use Phinx\Seed\AbstractSeed;
 
-class UserSeeder extends AbstractSeed
+class SettingSeeder extends AbstractSeed
 {
     /**
      * Run Method.
@@ -16,14 +17,16 @@ class UserSeeder extends AbstractSeed
     {
         $data = [
             [
-                'name' => 'Ashura',
-                'email' => 'ashura@ashura.com',
-                'password' => password_hash('123456', PASSWORD_DEFAULT),
-                'type' => 'admin'
+                'name' => 'app.name',
+                'value' => 'Spark'
+            ],
+            [
+                'name' => 'app.url',
+                'value' => 'http://localhost:8000'
             ]
         ];
 
-        $this->table('users')
+        $this->table('settings')
             ->insert($data)
             ->save();
     }

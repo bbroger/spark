@@ -4,4 +4,6 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 
 # Tarefas
 
-- [ ] Instalar o Laravel Mix
+- [x] Instalar o webpack
+- [x] Instalar o AdminLTE
+- [x] Adicionar o template de login
