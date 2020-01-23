@@ -19,3 +19,7 @@ $view->addExtension(
 $view->addExtension(
     new App\Extensions\ConfigExtension()
 );
+
+$view->addExtension(
+    new App\Extensions\UtilityExtension()
+);

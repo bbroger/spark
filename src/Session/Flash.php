@@ -50,7 +50,7 @@ class Flash extends Messages
         return $this->hasMessage($key);
     }
 
-    public function withInputs($inputs)
+    public function setInputs($inputs)
     {
         $this->put('_inputs', $inputs);
 
@@ -62,7 +62,7 @@ class Flash extends Messages
         return $this->get('_inputs', [])[$key] ?? $default;
     }
 
-    public function withErrors($errors)
+    public function setErrors($errors)
     {
         $this->put('_errors', $errors);
         

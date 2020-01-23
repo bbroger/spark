@@ -1,10 +1,7 @@
 <?php
 
-use Slim\Middleware\MethodOverrideMiddleware;
-use Middlewares\TrailingSlash;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
-use Slim\Views\TwigMiddleware;
 use Pimple\Container;
 use Pimple\Psr11\Container as Psr11Container;
 use Slim\Factory\AppFactory;
@@ -43,11 +40,7 @@ $container['session']->start();
 /**
  * Register app middlewares.
  */
-$app->addRoutingMiddleware();
-$app->add(new MethodOverrideMiddleware())
-    ->add(new TrailingSlash(false))
-    ->add($container['csrf'])
-    ->add(TwigMiddleware::createFromContainer($app));
+require PATH_CONFIG . '/middlewares.php';
 
 /**
  * Add error handling.

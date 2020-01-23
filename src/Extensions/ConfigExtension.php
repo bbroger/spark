@@ -17,7 +17,8 @@ class ConfigExtension extends AbstractExtension
             'url',
             'app_url',
             'app_name',
-            'setting'
+            'setting',
+            'title'
         ]);
     }
 

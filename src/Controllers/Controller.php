@@ -54,11 +54,9 @@ class Controller
 
         if (! $validator->isValid()) {
             $errors = $validator->getErrors();
+            $inputs = $validator->getValues();
 
-            $this->flash->withErrors($errors)
-                ->withInputs($validator->getValues());
-
-            throw new ValidationException($errors);
+            throw new ValidationException($errors, $inputs);
         }
     }
 }

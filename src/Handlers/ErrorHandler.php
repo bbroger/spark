@@ -4,18 +4,25 @@ namespace App\Handlers;
 
 use App\Exceptions\ValidationException;
 use Psr\Http\Message\ResponseInterface;
+use Slim\Exception\HttpMethodNotAllowedException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Handlers\ErrorHandler as BaseErrorHandler;
 
 class ErrorHandler extends BaseErrorHandler
 {
     private $view;
+    private $flash;
 
-    public function __construct($callableResolver, $responseFactory, $view)
-    {
+    public function __construct(
+        $callableResolver,
+        $responseFactory,
+        $view,
+        $flash
+    ) {
         parent::__construct($callableResolver, $responseFactory);
 
         $this->view = $view;
+        $this->flash = $flash;
     }
 
     public function render($view, $statusCode = 200)
@@ -25,18 +32,21 @@ class ErrorHandler extends BaseErrorHandler
         return $this->view->render($response, $view);
     }
 
-    public function notFound()
+    public function handleNotFoundException()
     {
         return $this->render('errors/404.twig', 404);
     }
 
-    public function validationException($code)
+    public function handleValidationException($exception)
     {
-        return $this->responseFactory->createResponse($code)
+        $this->flash->setErrors($exception->getErrors())
+            ->setInputs($exception->getInputs());
+
+        return $this->responseFactory->createResponse($exception->getCode())
             ->withRedirect($this->request->getUri());
     }
 
-    public function serverError()
+    public function handleServerError()
     {
         return $this->render('errors/500.twig', 500);
     }
@@ -46,11 +56,14 @@ class ErrorHandler extends BaseErrorHandler
         $exception = $this->exception;
 
         if ($exception instanceof HttpNotFoundException) {
-            return $this->notFound();
+            return $this->handleNotFoundException();
         } else if ($exception instanceof ValidationException) {
-            return $this->validationException($exception->getCode());
-        } else if (ENVIRONMENT == ENV_PRODUCTION) {
-            return $this->serverError();
+            return $this->handleValidationException($exception);
+        } else if (
+            ENVIRONMENT == ENV_PRODUCTION
+            || $exception instanceof HttpMethodNotAllowedException
+        ) {
+            return $this->handleServerError();
         }
 
         return parent::respond();

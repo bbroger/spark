@@ -5,8 +5,9 @@ namespace App\Extensions;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Illuminate\Support\MessageBag;
+use Twig\Extension\GlobalsInterface;
 
-class SessionExtension extends AbstractExtension
+class SessionExtension extends AbstractExtension implements GlobalsInterface
 {
     private $session;
     private $flash;
@@ -17,10 +18,10 @@ class SessionExtension extends AbstractExtension
         $this->session = $session;
         $this->flash = $flash;
         $this->errorBag = (new MessageBag())
-            ->merge($flash->getErrors());
+            ->merge($flash->getErrors());  
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [
             'session' => $this->session,

@@ -78,3 +78,8 @@ function asset_js($path)
 {
     return asset(FOLDER_JS . '/' . $path);
 }
+
+function title($title)
+{
+    return app_name() . ' - ' . $title;
+}

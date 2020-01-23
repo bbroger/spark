@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title></title>
+		<title>{{ title('Entrar') }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
 		<link rel="stylesheet" href="{{ asset_css('admin.css') }}">
@@ -13,7 +13,7 @@
 	<body class="hold-transition login-page">
 		<div class="login-box">
 			<div class="login-logo">
-				<a href="{{ app_url() }}">
+				<a href="{{ app_url() }}" class="logo">
 					<b>{{ app_name() }}</b>
 				</a>
 			</div>
@@ -22,22 +22,26 @@
 				<div class="card-body login-card-body">
 					<p class="login-box-msg">Entre para iniciar uma sessão</p>
 
-					<form action="{{ app_url() }}" method="post">
+					<form method="post">
+						{{ csrf_token() }}
+
 						<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="E-mail">
+							<input type="email" name="email" class="form-control {{ errors.has('email') ? 'is-invalid' : '' }}" placeholder="E-mail" value="{{ old('email') }}">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-envelope"></span>
 								</div>
 							</div>
+							<span class="error invalid-feedback">{{ error('email') }}</span>
 						</div>
 						<div class="input-group mb-3">
-							<input type="password" class="form-control" placeholder="Senha">
+							<input type="password" name="password" class="form-control {{ errors.has('password') ? 'is-invalid' : '' }}" placeholder="Senha" value="{{ old('password') }}">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-lock"></span>
 								</div>
 							</div>
+							<span class="error invalid-feedback">{{ error('password') }}</span>
 						</div>
 						<div class="row">
 							<div class="col-8">

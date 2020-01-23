@@ -1,5 +1,6 @@
 <?php
 
+use App\Auth\Manager;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
 use Slim\Factory\ServerRequestCreatorFactory;
@@ -9,6 +10,10 @@ use Odan\Session\PhpSession;
 use App\Validation\Validator;
 
 $container['app'] = $app;
+
+$container['auth'] = function ($c) {
+    return new Manager($c['session']);
+};
 
 $container['request'] = function () {
     $serverRequestCreator = ServerRequestCreatorFactory::create();
@@ -45,7 +50,8 @@ $container['errorHandler'] = function ($c) {
     return new ErrorHandler(
         $c['app']->getCallableResolver(),
         $c['app']->getResponseFactory(),
-        $c['view']
+        $c['view'],
+        $c['flash']
     );
 };
 
