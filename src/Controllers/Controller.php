@@ -19,7 +19,7 @@ class Controller
         return $this->container->get($property);
     }
 
-    public function render($response, $path, $data)
+    public function render($response, $path, $data = [])
     {
         return $this->view->render($response, $path, $data);
     }

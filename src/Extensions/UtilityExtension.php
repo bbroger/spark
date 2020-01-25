@@ -26,13 +26,12 @@ class UtilityExtension extends AbstractExtension
 
     public function isActive($route)
     {
-        $route = $route == '/' ? '' : $route;
         $path = $this->request->getUri()->getPath();
 
         if (Str::startsWith($path, '/admin')) {
             $route = '/admin' . $route;
         }
 
-        return Str::startsWith($path, $route) ? 'active' : null;
+        return $path == $route ? 'active' : null;
     }
 }

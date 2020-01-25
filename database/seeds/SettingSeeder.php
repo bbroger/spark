@@ -26,12 +26,19 @@ class SettingSeeder extends AbstractSeed
             ],
             [
                 'name' => 'font-awesome.kit',
-                'value' => ''
+                'value' => 'https://kit.fontawesome.com/5a3176b5aa.js'
+            ],
+            [
+                'name' => 'app.logo',
+                'value' => null
             ]
         ];
 
-        $this->table('settings')
-            ->insert($data)
-            ->save();
+        $settings = $this->table('settings');
+
+        $settings->truncate();
+        $settings->insert($data);
+
+        $settings->save();
     }
 }

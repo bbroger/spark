@@ -9,8 +9,8 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 - [x] Adicionar o template de login
 - [x] Criar um sistema de autenticação
 - [x] Criar o layout básico
-- [ ] Mecher na logo
-- [ ] Criar uma dashboard básica
+- [x] Mecher na logo
+- [x] Criar uma dashboard básica
 - [ ] Criar uma página listando os usuários
 - [ ] Criar uma página para adicionar usuários
 - [ ] Criar uma página para editar usuários

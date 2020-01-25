@@ -44,7 +44,6 @@
                             <i class="fas fa-bars"></i>
                         </a>
                     </li>
-                    <!-- TODO: Work on responsive design here. -->
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="{{ admin_url('/') }}" class="nav-link">
                             Página inicial
@@ -79,15 +78,13 @@
 
             <!-- Sidebar wrapper -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                <a href="{{ app_url() }}" class="brand-link">
-                    <!-- 
-                        TODO: Add logo on small devices on when click
-                        on sidebar toggler button.
-                        Tip: See https://adminlte.io/docs/3.0/license.html 
-                        page code.
-                        Or, hide the .brand-link when click on toggler
-                        or is on mobile devices, with .hide-on-xs or another stuff. (if no has a logo).
-                    -->
+                <a 
+                    href="{{ app_url() }}" 
+                    class="brand-link {{ app_logo() ? '' : 'no-logo' }}"
+                >
+                    {% if app_logo() %}
+                        <img src="{{ app_logo() }}" width="40" height="40">
+                    {% endif %}
                     <span class="brand-text font-weight-light">{{ app_name() }}</span>
                 </a>
 
@@ -107,7 +104,7 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-item">
-                                <a href="{{ app_url() }}" class="nav-link {{ is_active('/') }}">
+                                <a href="{{ admin_url('/') }}" class="nav-link {{ is_active('/') }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Página inicial
