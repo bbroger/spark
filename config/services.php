@@ -1,10 +1,10 @@
 <?php
 
 use App\Auth\Manager;
+use App\Exceptions\Handler;
 use Slim\Views\Twig;
 use Slim\Csrf\Guard;
 use Slim\Factory\ServerRequestCreatorFactory;
-use App\Handlers\ErrorHandler;
 use App\Session\Flash;
 use Odan\Session\PhpSession;
 use App\Validation\Validator;
@@ -41,13 +41,13 @@ $container['view'] = function ($container) {
 
     $view = Twig::create(PATH_VIEWS, $settings);
 
-    require_once PATH_CONFIG . '/twig.php';
+    require_once PATH_CONFIG . '/view.php';
 
     return $view;
 };
 
 $container['errorHandler'] = function ($c) {
-    return new ErrorHandler(
+    return new Handler(
         $c['app']->getCallableResolver(),
         $c['app']->getResponseFactory(),
         $c['view'],

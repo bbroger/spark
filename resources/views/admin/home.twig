@@ -1,5 +1,24 @@
 {% extends "layouts/admin.twig" %}
 
+{% set title = 'Página Inicial' %}
+
 {% block content %}
-    
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ usersCount }}</h3>
+
+                    <p>Usuários</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="{{ admin_url('/users') }}" class="small-box-footer">
+                    Ver todos os usuários
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

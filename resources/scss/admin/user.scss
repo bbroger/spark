@@ -1,0 +1,13 @@
+.user-info {
+    span,
+    img {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+    }
+}

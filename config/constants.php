@@ -8,6 +8,7 @@ if (!defined('DS'))
  */
 define('FOLDER_CSS', '/css');
 define('FOLDER_JS', '/js');
+define('FOLDER_IMAGES', '/images');
 
 /**
  * Paths.
@@ -24,6 +25,7 @@ define('PATH_VIEWS', PATH_RESOURCES . '/views');
 define('PATH_CACHE', PATH_STORAGE . '/cache');
 define('PATH_CSS', PATH_WEBROOT . FOLDER_CSS);
 define('PATH_JS', PATH_WEBROOT . FOLDER_JS);
+define('PATH_IMAGES', PATH_WEBROOT . FOLDER_IMAGES);
 
 /**
  * Environment types.

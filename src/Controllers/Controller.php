@@ -19,9 +19,9 @@ class Controller
         return $this->container->get($property);
     }
 
-    public function render($response, $path)
+    public function render($response, $path, $data)
     {
-        return $this->view->render($response, $path);
+        return $this->view->render($response, $path, $data);
     }
 
     /**
@@ -41,18 +41,17 @@ class Controller
      * @see https://github.com/awurth/SlimValidation
      */
     public function validate(
-        $input, 
-        $rules, 
+        $input,
+        $rules,
         $messages = [], /* Custom messages */
-        $group = null, 
+        $group = null,
         $default = []
-    )
-    {
+    ) {
         $validator = $this->validator;
 
         $validator->validate($input, $rules, $group, $messages, $default);
 
-        if (! $validator->isValid()) {
+        if (!$validator->isValid()) {
             $errors = $validator->getErrors();
             $inputs = $validator->getValues();
 

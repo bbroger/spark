@@ -8,7 +8,8 @@ Skeleton simples para projetos pequenos, simples e sem complexidade. Para projet
 - [x] Instalar o AdminLTE
 - [x] Adicionar o template de login
 - [x] Criar um sistema de autenticação
-- [ ] Criar o layout básico
+- [x] Criar o layout básico
+- [ ] Mecher na logo
 - [ ] Criar uma dashboard básica
 - [ ] Criar uma página listando os usuários
 - [ ] Criar uma página para adicionar usuários

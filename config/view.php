@@ -12,7 +12,8 @@ $view->addExtension(
 
 $view->addExtension(
     new App\Extensions\SessionExtension(
-        $container['session'], $container['flash']
+        $container['session'],
+        $container['flash']
     )
 );
 
@@ -21,5 +22,9 @@ $view->addExtension(
 );
 
 $view->addExtension(
-    new App\Extensions\UtilityExtension()
+    new App\Extensions\UtilityExtension($container['request'])
+);
+
+$view->addExtension(
+    new App\Extensions\AuthExtension($container['auth'])
 );

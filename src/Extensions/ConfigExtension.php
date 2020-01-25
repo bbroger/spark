@@ -18,7 +18,8 @@ class ConfigExtension extends AbstractExtension
             'app_url',
             'app_name',
             'setting',
-            'title'
+            'title',
+            'admin_url'
         ]);
     }
 

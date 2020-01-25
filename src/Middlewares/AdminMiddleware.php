@@ -2,6 +2,8 @@
 
 namespace App\Middlewares;
 
+use App\Models\User;
+
 class AdminMiddleware
 {
     private $auth;
@@ -15,7 +17,7 @@ class AdminMiddleware
 
     public function __invoke($request, $handler)
     {
-        if (! $this->auth->check()) {
+        if (!$this->auth->check() || $this->auth->user()->type != User::ADMIN) {
             return $this->responseFactory->createResponse(403)
                 ->withRedirect('/admin/login');
         }

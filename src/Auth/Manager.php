@@ -28,13 +28,13 @@ class Manager
     {
         $user = User::where('email', $email)->first();
 
-        if (! $user) {
+        if (!$user) {
             throw new ValidationException([
                 'email' => ['E-mail não encontrado.'],
             ], compact('email', 'password'));
         }
 
-        if (! password_verify($password, $user->password)) {
+        if (!password_verify($password, $user->password)) {
             throw new ValidationException([
                 'password' => ['Senha inválida.']
             ], compact('email', 'password'));
@@ -51,7 +51,7 @@ class Manager
     {
         return $this->session->has('user_id');
     }
-    
+
     public function logout()
     {
         $this->session->remove('user_id');

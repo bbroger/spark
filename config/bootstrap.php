@@ -38,22 +38,6 @@ require PATH_CONFIG . '/services.php';
 $container['session']->start();
 
 /**
- * Register app middlewares.
- */
-require PATH_CONFIG . '/middlewares.php';
-
-/**
- * Add error handling.
- */
-$errorMiddleware = $app->addErrorMiddleware(
-    ENVIRONMENT == ENV_DEVELOPMENT,
-    true,
-    true
-);
-
-$errorMiddleware->setDefaultErrorHandler($container['errorHandler']);
-
-/**
  * Boot the Eloquent ORM.
  */
 $capsule = new Capsule;
@@ -72,8 +56,24 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 /**
+ * Register app middlewares.
+ */
+require PATH_CONFIG . '/middlewares.php';
+
+/**
+ * Add error handling.
+ */
+$errorMiddleware = $app->addErrorMiddleware(
+    ENVIRONMENT == ENV_DEVELOPMENT,
+    true,
+    true
+);
+
+$errorMiddleware->setDefaultErrorHandler($container['errorHandler']);
+
+/**
  * Register the routes.
- */ 
+ */
 require PATH_CONFIG . '/routes.php';
 
 /**

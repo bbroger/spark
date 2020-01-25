@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Handlers;
+namespace App\Exceptions;
 
-use App\Exceptions\ValidationException;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\HttpMethodNotAllowedException;
 use Slim\Exception\HttpNotFoundException;
-use Slim\Handlers\ErrorHandler as BaseErrorHandler;
+use Slim\Handlers\ErrorHandler;
 
-class ErrorHandler extends BaseErrorHandler
+class Handler extends ErrorHandler
 {
     private $view;
     private $flash;
