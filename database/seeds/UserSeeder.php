@@ -14,17 +14,16 @@ class UserSeeder extends AbstractSeed
      */
     public function run()
     {
-        $data = [
-            [
-                'name' => 'Ashura',
-                'email' => 'ashura@ashura.com',
-                'password' => password_hash('123456', PASSWORD_DEFAULT),
-                'type' => 'admin'
-            ]
-        ];
+        $faker = Faker\Factory::create();
+        $data = [];
+        for ($i = 0; $i < 100; $i++) {
+            $data[] = [
+                'name'          => $faker->name,
+                'password'      => password_hash('123456', PASSWORD_DEFAULT),
+                'email'         => $faker->email
+            ];
+        }
 
-        $this->table('users')
-            ->insert($data)
-            ->save();
+        $this->table('users')->insert($data)->save();
     }
 }

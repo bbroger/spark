@@ -1,7 +1,7 @@
 <?php
 
 $view->addExtension(
-    new App\Extensions\CsrfExtension($container['csrf'])
+    new App\View\CsrfExtension($container['csrf'])
 );
 
 $view->addExtension(
@@ -11,20 +11,20 @@ $view->addExtension(
 );
 
 $view->addExtension(
-    new App\Extensions\SessionExtension(
+    new App\View\SessionExtension(
         $container['session'],
         $container['flash']
     )
 );
 
 $view->addExtension(
-    new App\Extensions\ConfigExtension()
+    new App\View\ConfigExtension()
 );
 
 $view->addExtension(
-    new App\Extensions\UtilityExtension($container['request'])
+    new App\View\UtilityExtension($container['request'])
 );
 
 $view->addExtension(
-    new App\Extensions\AuthExtension($container['auth'])
+    new App\View\AuthExtension($container['auth'])
 );

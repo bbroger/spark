@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Capsule\Manager as Capsule;
 use Dotenv\Dotenv;
 use Pimple\Container;
 use Pimple\Psr11\Container as Psr11Container;
@@ -40,20 +39,16 @@ $container['session']->start();
 /**
  * Boot the Eloquent ORM.
  */
-$capsule = new Capsule;
-$capsule->addConnection([
-    'driver'    => env_get('DB_DRIVER', 'mysql'),
-    'host'      => env_get('DB_HOST', 'localhost'),
-    'database'  => env_get('DB_DATABASE', 'spark'),
-    'username'  => env_get('DB_USERNAME', 'root'),
-    'password'  => env_get('DB_PASSWORD', 'root'),
-    'charset'   => env_get('DB_CHARSET', 'utf8'),
-    'collation' => env_get('DB_COLLATION', 'utf8_unicode_ci'),
-    'prefix'    => env_get('DB_PREFIX', ''),
-]);
+$capsule = $container['db'];
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
+
+/**
+ * Configure the Illuminate\Pagination package.
+ */
+require __DIR__ . '/pagination.php';
+$view = $container['view'];
 
 /**
  * Register app middlewares.

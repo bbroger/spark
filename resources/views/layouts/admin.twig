@@ -67,7 +67,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- TODO: Add a form on logout link -->
-                            <a href="{{ admin_url('/logout') }}" class="dropdown-item">
+                            <a 
+                                href="{{ admin_url('/logout') }}" class="dropdown-item"
+                            >
                                 <i class="fas fa-power-off"></i>
                                 Sair
                             </a>
@@ -85,16 +87,19 @@
                     {% if app_logo() %}
                         <img src="{{ app_logo() }}" width="40" height="40">
                     {% endif %}
+
                     <span class="brand-text font-weight-light">{{ app_name() }}</span>
                 </a>
 
                 <!-- Sidebar -->
                 <div class="sidebar">
+
                     <!-- Sidebar user panel -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
                             <img src="{{ user.avatar_url }}" class="img-circle elevation-2" alt="User Image">
                         </div>
+
                         <div class="info">
                             <a href="{{ admin_url('/users/#{user.id}') }}" class="d-block">{{ user.name }}</a>
                         </div>
@@ -102,7 +107,11 @@
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <ul 
+                            class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" 
+                            role="menu" 
+                            data-accordion="false"
+                        >
                             <li class="nav-item">
                                 <a href="{{ admin_url('/') }}" class="nav-link {{ is_active('/') }}">
                                     <i class="nav-icon fas fa-home"></i>
@@ -110,6 +119,23 @@
                                         Página inicial
                                     </p>
                                 </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Usuários
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ admin_url('/users') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Lista de usuários</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ admin_url('/about') }}" class="nav-link {{ is_active('/about') }}">
@@ -127,20 +153,19 @@
             <!-- Page content wrapper -->
             <div class="content-wrapper">
                 <!-- Page content header-->
-                <div class="content-header">
+                <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h2 class="m-0 text-dark">{{ title }}</h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    {% block breadcrumbs %}{% endblock %}
-                                </ol>
+                            <div class="col-sm-5 d-sm-flex">
+                                <h1 class="m-0 text-dark page-title mr-sm-2 mb-2">
+                                    {{ title }}
+                                </h1>
+
+                                {% block buttons %}{% endblock %}
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <!-- Page container -->
                 <section class="content">

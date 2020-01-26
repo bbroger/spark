@@ -22,6 +22,10 @@ $app->group('/admin', function ($group) {
         $group->get('', Admin\HomeController::class . ':index');
         $group->get('/about', Admin\AboutController::class . ':index');
 
+        $group->group('/users', function ($group) {
+            $group->get('', Admin\UserController::class . ':index');
+        });
+
         // TODO: Replace HTTP get method with POST method.
         $group->get('/logout', LoginController::class . ':logout');
     })->add(new AdminMiddleware($auth, $responseFactory));

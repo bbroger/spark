@@ -8,6 +8,7 @@ use Slim\Factory\ServerRequestCreatorFactory;
 use App\Session\Flash;
 use Odan\Session\PhpSession;
 use App\Validation\Validator;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 $container['app'] = $app;
 
@@ -73,4 +74,28 @@ $container['session'] = function () {
 
 $container['flash'] = function () {
     return new Flash;
+};
+
+$container['db'] = function () {
+    $capsule = new Capsule;
+    $capsule->addConnection([
+        'driver'    => env_get('DB_DRIVER', 'mysql'),
+        'host'      => env_get('DB_HOST', 'localhost'),
+        'database'  => env_get('DB_DATABASE', 'spark'),
+        'username'  => env_get('DB_USERNAME', 'root'),
+        'password'  => env_get('DB_PASSWORD', 'root'),
+        'charset'   => env_get('DB_CHARSET', 'utf8'),
+        'collation' => env_get('DB_COLLATION', 'utf8_unicode_ci'),
+        'prefix'    => env_get('DB_PREFIX', ''),
+    ]);
+
+    return $capsule;
+};
+
+$container['viewFactory'] = function ($c) {
+    return new Factory($c['view']);
+};
+
+$container['pageResolver'] = function ($c) {
+    return $c['request']->getParam('page');
 };

@@ -17,4 +17,12 @@ class User extends Model
             ? /* TODO: Add storage link */ null
             : get_gravatar($this->email);
     }
+
+    public function getTypeLabelAttribute()
+    {
+        return [
+            self::ADMIN => 'Administrador',
+            self::NORMAL => 'Normal'
+        ][$this->type];
+    }
 }

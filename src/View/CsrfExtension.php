@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Extensions;
+namespace App\View;
 
 use Slim\Csrf\Guard;
 use Twig\Extension\AbstractExtension;

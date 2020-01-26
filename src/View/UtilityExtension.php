@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Extensions;
+namespace App\View;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -20,7 +20,9 @@ class UtilityExtension extends AbstractExtension
         return [
             new TwigFunction('dump', 'dump', ['is_safe' => ['html']]),
             new TwigFunction('var_dump', 'var_dump'),
-            new TwigFunction('is_active', [$this, 'isActive'])
+            new TwigFunction('is_active', [$this, 'isActive']),
+            new TwigFunction('is_string', 'is_string'),
+            new TwigFunction('is_array', 'is_array')
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Extensions;
+namespace App\View;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -18,7 +18,7 @@ class SessionExtension extends AbstractExtension implements GlobalsInterface
         $this->session = $session;
         $this->flash = $flash;
         $this->errorBag = (new MessageBag())
-            ->merge($flash->getErrors());  
+            ->merge($flash->getErrors());
     }
 
     public function getGlobals(): array
