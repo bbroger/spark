@@ -112,6 +112,7 @@
                             role="menu" 
                             data-accordion="false"
                         >
+                            <!-- Home page -->
                             <li class="nav-item">
                                 <a href="{{ admin_url('/') }}" class="nav-link {{ is_active('/') }}">
                                     <i class="nav-icon fas fa-home"></i>
@@ -120,7 +121,10 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item has-treeview">
+                            <!-- Users tree -->
+                            <li 
+                                class="nav-item has-treeview {{ is_menu_open('/users') }}"
+                            >
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
@@ -130,9 +134,18 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ admin_url('/users') }}" class="nav-link">
+                                        <a 
+                                            href="{{ admin_url('/users') }}" class="nav-link {{ is_active('/users') }}"
+                                        >
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Lista de usuários</p>
+                                        </a>
+                                        <a 
+                                            href="{{ admin_url('/users/create') }}"
+                                            class="nav-link {{ is_active('/users/create') }}"
+                                        >
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Adicionar novo usuário</p>
                                         </a>
                                     </li>
                                 </ul>

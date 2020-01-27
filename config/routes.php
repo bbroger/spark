@@ -24,6 +24,8 @@ $app->group('/admin', function ($group) {
 
         $group->group('/users', function ($group) {
             $group->get('', Admin\UserController::class . ':index');
+            $group->get('/create', Admin\UserController::class . ':create');
+            $group->post('', Admin\UserController::class . ':store');
         });
 
         // TODO: Replace HTTP get method with POST method.

@@ -51,11 +51,14 @@ class Controller
 
         $validator->validate($input, $rules, $group, $messages, $default);
 
+        $inputs = $validator->getValues();
+
         if (!$validator->isValid()) {
             $errors = $validator->getErrors();
-            $inputs = $validator->getValues();
 
             throw new ValidationException($errors, $inputs);
         }
+
+        return $inputs;
     }
 }

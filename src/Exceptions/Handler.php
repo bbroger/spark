@@ -42,7 +42,7 @@ class Handler extends ErrorHandler
             ->setInputs($exception->getInputs());
 
         return $this->responseFactory->createResponse($exception->getCode())
-            ->withRedirect($this->request->getUri());
+            ->withRedirect($this->flash->getPreviousUrl());
     }
 
     public function handleServerError()

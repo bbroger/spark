@@ -43,7 +43,7 @@ class Flash extends Messages
     public function get($key, $default = null)
     {
         return $this->getMessage($key) ?? $default;
-    }   
+    }
 
     public function has($key)
     {
@@ -65,12 +65,33 @@ class Flash extends Messages
     public function setErrors($errors)
     {
         $this->put('_errors', $errors);
-        
+
+        return $this;
+    }
+
+    public function addError($key, $value)
+    {
+        $errors = $this->getErrors();
+
+        $errors[$key] = $value;
+
+        $this->setErrors($errors);
+
         return $this;
     }
 
     public function getErrors($default = [])
     {
         return $this->get('_errors', $default);
+    }
+
+    public function setPreviuousUrl($url)
+    {
+        $this->put('_previuous_url', $url);
+    }
+
+    public function getPreviousUrl()
+    {
+        return $this->get('_previuous_url');
     }
 }

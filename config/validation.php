@@ -1,7 +1,9 @@
 <?php
 
+Respect\Validation\Validator::with('App\Validation\Rules');
+
 return [
-    'showValidationRules' => true,
+    'showValidationRules' => false,
 
     /**
      * Default messages.
@@ -9,6 +11,9 @@ return [
     'messages' => [
         'notBlank' => 'O campo {{name}} é obrigatório.',
         'notEmpty' => 'O campo {{name}} é obrigatório.',
+        'email' => 'O campo {{name}} precisa ter um e-mail válido.',
+        'length' => 'O campo {{name}} precisa ter um tamanho entre {{minValue}} e {{maxValue}}.',
+        'uniqueField' => 'O valor do campo {{name}} já está sendo utilizado.',
 
         /**
          * Default custom messages for attributes.
@@ -20,7 +25,7 @@ return [
             'example' => 'O corpo precisa ser numérico e preenchido.',
 
             'example.notBlank' => 'Preencha este campo.',
-            
+
             'example' => [
                 // The last is the matched
                 'notBlank' => 'customized-message'
@@ -29,6 +34,6 @@ return [
     ],
 
     'attributes' => [
-        'example' => 'exemplo'    
+        'example' => 'exemplo'
     ]
 ];

@@ -5,7 +5,6 @@ namespace App\Validation;
 use Awurth\SlimValidation\Configuration;
 use Awurth\SlimValidation\Validator as BaseValidator;
 use Respect\Validation\Exceptions\NestedValidationException;
-use Illuminate\Support\Str;
 
 class Validator extends BaseValidator
 {

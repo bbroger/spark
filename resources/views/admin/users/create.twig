@@ -1,0 +1,65 @@
+{% extends 'layouts/admin.twig' %}
+
+{% set title = 'Novo usuário' %}
+
+{% block content %}
+    <form method="POST" class="col-md-8" action="./">
+        {{ csrf_token() }}
+
+        <!-- Name -->
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                class="form-control {{ is_invalid('name') }}" 
+                value="{{ old('name') }}"
+            />
+            <span class="error invalid-feedback">{{ error('name') }}</span>
+        </div>
+
+        <!-- E-mail -->
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input 
+                type="text" 
+                name="email" 
+                id="email" 
+                class="form-control {{ is_invalid('email') }}" 
+                value="{{ old('email') }}" 
+            />
+            <span class="error invalid-feedback">{{ error('email') }}</span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input 
+                type="password" 
+                name="password" 
+                id="password" 
+                class="form-control {{ is_invalid('password') }}" 
+                value="{{ old('password') }}" 
+            />
+            <span class="error invalid-feedback">{{ error('password') }}</span>
+        </div>
+
+        <!-- Type (role) -->
+        <div class="form-group">
+            <label for="type">Tipo</label>
+            <select 
+                class="form-control {{ is_invalid('type') }}" 
+                id="type" 
+                name="type"
+            >
+                <option disabled selected>Selecionar...</option>
+                <option value="normal" {{ is_selected('type', 'normal') }}>Normal</option>
+                <option value="admin" {{ is_selected('type', 'admin') }}>Administrador</option>
+            </select>
+            <span class="error invalid-feedback">{{ error('type') }}</span>
+        </div>
+
+        <input type="submit" class="btn-primary btn" value="Criar" />
+    </form>
+{% endblock %}

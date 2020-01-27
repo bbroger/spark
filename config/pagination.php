@@ -11,6 +11,6 @@ Paginator::currentPageResolver(function ($pageName) use ($container) {
     return $container['request']->getParam($pageName, 1);
 });
 
-Paginator::currentPathResolver(function () {
-    return '';
+Paginator::currentPathResolver(function () use ($container) {
+    return '?' . $container['request']->getUri()->getQuery();
 });

@@ -34,8 +34,20 @@ class SessionExtension extends AbstractExtension implements GlobalsInterface
     {
         return [
             new TwigFunction('old', [$this, 'old']),
-            new TwigFunction('error', [$this->errorBag, 'first'])
+            new TwigFunction('is_invalid', [$this, 'isInvalid']),
+            new TwigFunction('error', [$this->errorBag, 'first']),
+            new TwigFunction('is_selected', [$this, 'isSelected'])
         ];
+    }
+
+    public function isSelected($input, $item)
+    {
+        return $this->flash->old($input) == $item ? ' selected' : null;
+    }
+
+    public function isInvalid($input)
+    {
+        return $this->errorBag->has($input) ? ' is-invalid' : '';
     }
 
     public function old($key, $default = null)
