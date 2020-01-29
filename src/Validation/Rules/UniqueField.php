@@ -10,7 +10,7 @@ class UniqueField extends AbstractRule
     public $column;
     public $ignore;
 
-    public function __construct($model, $column, $ignore)
+    public function __construct($model, $column, $ignore = null)
     {
         $this->model = $model;
         $this->column = $column;
