@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  devtool: 'source-map',
+
   entry: {
     admin: __dirname + '/resources/js/admin/app.js'
   },

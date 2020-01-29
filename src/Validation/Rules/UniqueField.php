@@ -8,15 +8,19 @@ class UniqueField extends AbstractRule
 {
     public $model;
     public $column;
+    public $ignore;
 
-    public function __construct($model, $column)
+    public function __construct($model, $column, $ignore)
     {
         $this->model = $model;
         $this->column = $column;
+        $this->ignore = $ignore;
     }
 
     public function validate($input): bool
     {
-        return !$this->model::where($this->column, $input)->exists();
+        return $input == $this->ignore 
+            ? true
+            : !$this->model::where($this->column, $input)->exists();
     }
 }

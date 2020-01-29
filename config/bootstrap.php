@@ -32,11 +32,6 @@ $app = AppFactory::create();
 require PATH_CONFIG . '/services.php';
 
 /**
- * Load the session.
- */
-$container['session']->start();
-
-/**
  * Boot the Eloquent ORM.
  */
 $capsule = $container['db'];
@@ -45,26 +40,19 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 /**
+ * Load the session.
+ */
+$container['session']->start();
+
+/**
  * Configure the Illuminate\Pagination package.
  */
 require __DIR__ . '/pagination.php';
-$view = $container['view'];
 
 /**
  * Register app middlewares.
  */
 require PATH_CONFIG . '/middlewares.php';
-
-/**
- * Add error handling.
- */
-$errorMiddleware = $app->addErrorMiddleware(
-    ENVIRONMENT == ENV_DEVELOPMENT,
-    true,
-    true
-);
-
-$errorMiddleware->setDefaultErrorHandler($container['errorHandler']);
 
 /**
  * Register the routes.

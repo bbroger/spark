@@ -40,7 +40,7 @@ class Controller
      * @see config/validation.php
      * @see https://github.com/awurth/SlimValidation
      */
-    public function validate(
+    protected function validate(
         $input,
         $rules,
         $messages = [], /* Custom messages */

@@ -61,8 +61,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <div class="user-info">
-                                <img src="{{ user.avatar_url }}" />
-                                <span>{{ user.name }}</span>
+                                <img src="{{ currentUser.avatar_url }}" />
+                                <span>{{ currentUser.name }}</span>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -97,11 +97,11 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="{{ user.avatar_url }}" class="img-circle elevation-2" alt="User Image">
+                            <img src="{{ currentUser.avatar_url }}" class="img-circle elevation-2" alt="User Image">
                         </div>
 
                         <div class="info">
-                            <a href="{{ admin_url('/users/#{user.id}') }}" class="d-block">{{ user.name }}</a>
+                            <a href="{{ admin_url("/users/#{currentUser.id}/edit") }}" class="d-block">{{ currentUser.name }}</a>
                         </div>
                     </div>
 
@@ -189,6 +189,27 @@
             </div>
         </div>
 
+        <!-- Modals -->
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirm" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body" id="delete-modal-message"></div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" id="delete-modal-confirm">Sim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Scripts -->
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -202,5 +223,13 @@
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.10.2/js/jquery.overlayScrollbars.min.js"></script>
         <script src="{{ asset_js('admin.js') }}"></script>
+        <script type="text/javascript">
+            $.ajaxSetup({
+              data: {
+                '{{ csrf.keys.name }}': '{{ csrf.name }}',
+                '{{ csrf.keys.value }}': '{{ csrf.value }}',
+              }
+            });
+        </script>
     </body>
 </html>

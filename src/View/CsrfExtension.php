@@ -43,13 +43,13 @@ class CsrfExtension extends AbstractExtension implements GlobalsInterface
         return [
             new TwigFunction(
                 'csrf_token',
-                [$this, 'getCsrfToken'],
+                [$this, 'getCsrfField'],
                 ['is_safe' => ['html']]
             )
         ];
     }
 
-    public function getCsrfToken()
+    public function getCsrfField()
     {
         $nameKey = $this->csrf->getTokenNameKey();
         $valueKey = $this->csrf->getTokenValueKey();

@@ -13,7 +13,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 $container['app'] = $app;
 
 $container['auth'] = function ($c) {
-    return new Manager($c['session']);
+    return new Manager($c['session'], $c['request']);
 };
 
 $container['request'] = function () {

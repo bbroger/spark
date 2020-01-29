@@ -1,9 +1,8 @@
 {% extends 'layouts/admin.twig' %}
 
-{% set title = 'Novo usuário' %}
-
 {% block content %}
     <form method="POST" class="col-md-8" action="./">
+        {{ method(user is defined ? 'PUT' : 'POST') }}
         {{ csrf_token() }}
 
         <!-- Name -->
@@ -14,7 +13,7 @@
                 name="name" 
                 id="name" 
                 class="form-control {{ is_invalid('name') }}" 
-                value="{{ old('name') }}"
+                value="{{ old('name', user.name) }}"
             />
             <span class="error invalid-feedback">{{ error('name') }}</span>
         </div>
@@ -27,7 +26,7 @@
                 name="email" 
                 id="email" 
                 class="form-control {{ is_invalid('email') }}" 
-                value="{{ old('email') }}" 
+                value="{{ old('email', user.email) }}" 
             />
             <span class="error invalid-feedback">{{ error('email') }}</span>
         </div>
@@ -54,12 +53,24 @@
                 name="type"
             >
                 <option disabled selected>Selecionar...</option>
-                <option value="normal" {{ is_selected('type', 'normal') }}>Normal</option>
-                <option value="admin" {{ is_selected('type', 'admin') }}>Administrador</option>
+                
+                <option 
+                    value="normal" 
+                    {{ is_selected('type', 'normal', user.type) }}
+                >
+                    Normal
+                </option>
+
+                <option 
+                    value="admin" 
+                    {{ is_selected('type', 'admin', user.type) }}
+                >
+                    Administrador
+                </option>
             </select>
             <span class="error invalid-feedback">{{ error('type') }}</span>
         </div>
 
-        <input type="submit" class="btn-primary btn" value="Criar" />
+        <input type="submit" class="btn-primary btn" value="Salvar" />
     </form>
 {% endblock %}

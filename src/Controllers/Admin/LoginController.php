@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -16,7 +17,7 @@ class LoginController extends Controller
         $email = $request->getParam('email');
         $password = $request->getParam('password');
 
-        $this->auth->attempt($email, $password);
+        $this->auth->attempt($email, $password, User::ADMIN);
 
         return $response->withRedirect('/admin');
     }

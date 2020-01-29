@@ -25,4 +25,9 @@ class User extends Model
             self::NORMAL => 'Normal'
         ][$this->type];
     }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = password_hash($value, PASSWORD_DEFAULT);
+    }
 }

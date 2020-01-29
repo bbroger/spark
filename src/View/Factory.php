@@ -20,7 +20,7 @@ class Factory
 
     public function render()
     {
-        return $this->view->fetch('pagination.twig', $this->data);
+        return $this->view->fetch('pagination/default.twig', $this->data);
     }
 
     public function __toString()

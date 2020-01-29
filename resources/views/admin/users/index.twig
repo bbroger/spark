@@ -70,13 +70,18 @@
                                     Editar
                                 </a>
 
-                                <a 
-                                    class="btn btn-danger btn-sm" 
-                                    href="#"
-                                >
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Remover
-                                </a>
+                                {% if user.id != currentUser.id %}
+                                    <a
+                                        class="btn btn-danger btn-sm btn-delete" 
+                                        href="{{ admin_url("/users/#{user.id}") }}"
+                                        data-delete-message="
+                                            Deseja mesmo deletar o usuário <strong>{{ user.name }}</strong>?
+                                        "
+                                    >
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Remover
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

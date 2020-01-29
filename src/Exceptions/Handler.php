@@ -3,8 +3,11 @@
 namespace App\Exceptions;
 
 use Psr\Http\Message\ResponseInterface;
-use Slim\Exception\HttpMethodNotAllowedException;
-use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\{
+    HttpMethodNotAllowedException,
+    HttpForbiddenException,
+    HttpNotFoundException
+};
 use Slim\Handlers\ErrorHandler;
 
 class Handler extends ErrorHandler
@@ -50,6 +53,11 @@ class Handler extends ErrorHandler
         return $this->render('errors/500.twig', 500);
     }
 
+    public function handleForbiddenException()
+    {
+        return $this->render('errors/403.twig', 403);
+    }
+
     protected function respond(): ResponseInterface
     {
         $exception = $this->exception;
@@ -58,10 +66,9 @@ class Handler extends ErrorHandler
             return $this->handleNotFoundException();
         } else if ($exception instanceof ValidationException) {
             return $this->handleValidationException($exception);
-        } else if (
-            ENVIRONMENT == ENV_PRODUCTION
-            || $exception instanceof HttpMethodNotAllowedException
-        ) {
+        } else if ($exception instanceof HttpForbiddenException) {
+            return $this->handleForbiddenException();
+        } else if (ENVIRONMENT == ENV_PRODUCTION) {
             return $this->handleServerError();
         }
 

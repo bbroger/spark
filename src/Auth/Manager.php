@@ -4,15 +4,18 @@ namespace App\Auth;
 
 use App\Models\User;
 use App\Exceptions\ValidationException;
+use Slim\Exception\HttpForbiddenException;
 
 class Manager
 {
     private $session;
     private $user;
+    private $request;
 
-    public function __construct($session)
+    public function __construct($session, $request)
     {
         $this->session = $session;
+        $this->request = $request;
     }
 
     public function user()
@@ -24,7 +27,7 @@ class Manager
         return $this->user;
     }
 
-    public function attempt($email, $password)
+    public function attempt($email, $password, $type = null)
     {
         $user = User::where('email', $email)->first();
 
@@ -32,6 +35,10 @@ class Manager
             throw new ValidationException([
                 'email' => ['E-mail não encontrado.'],
             ], compact('email', 'password'));
+        }
+
+        if ($type && $user->type != $type) {
+            throw new HttpForbiddenException($this->request);
         }
 
         if (!password_verify($password, $user->password)) {

@@ -2,6 +2,7 @@
 
 use App\Models\Setting;
 use Illuminate\Support\Str;
+use Slim\Exception\HttpNotFoundException;
 
 function env_get($var, $default = '')
 {

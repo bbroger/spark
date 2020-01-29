@@ -40,9 +40,10 @@ class SessionExtension extends AbstractExtension implements GlobalsInterface
         ];
     }
 
-    public function isSelected($input, $item)
+    public function isSelected($input, $item, $default = null)
     {
-        return $this->flash->old($input) == $item ? ' selected' : null;
+        return $this->flash->old($input) == $item
+            || $default == $item ? ' selected' : null;
     }
 
     public function isInvalid($input)
