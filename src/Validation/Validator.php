@@ -63,8 +63,6 @@ class Validator extends BaseValidator
             $this->handleValidationException($e, $config, $messages);
         }
 
-        return !empty($input) 
-            ? $this->setValue($config->getKey(), $input, $config->getGroup())
-            : $this;
+        return $this->setValue($config->getKey(), $input, $config->getGroup());
     }
 }

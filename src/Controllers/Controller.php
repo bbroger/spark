@@ -59,6 +59,8 @@ class Controller
             throw new ValidationException($errors, $inputs);
         }
 
-        return $inputs;
+        return array_filter(array_merge($input->getParams(), $inputs), function ($value) {
+            return $value != '' && $value != null;
+        });
     }
 }

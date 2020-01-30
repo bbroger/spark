@@ -2,6 +2,7 @@
 
 use App\Models\Setting;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Slim\Exception\HttpNotFoundException;
 
 function env_get($var, $default = '')
@@ -124,4 +125,10 @@ function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts 
 function app_logo()
 {
     return setting('app.logo');
+}
+
+
+function arr_only($keys)
+{
+    return Arr::only($array, $keys);
 }
