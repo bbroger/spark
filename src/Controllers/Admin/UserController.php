@@ -34,10 +34,15 @@ class UserController extends Controller
             'name' => v::notBlank()->setName('nome'),
             'email' => v::notBlank()->uniqueField(User::class, 'email')->email(),
             'password' => v::notBlank()->length(6)->setName('senha'),
-            'type' => v::notBlank()->in(['admin', 'normal'])->setName('tipo')
+            'type' => v::notBlank()->in(['admin', 'normal'])->setName('tipo'),
+            'avatar' => v::optional(v::uploaded()->image())
         ], [
             'password.length' => 'O campo senha precisa ter no mínimo 6 caracteres.'
         ]);
+
+        if (isset($user['avatar'])) {
+            $user['avatar'] = moveUploadedFile($user['avatar'], PATH_AVATARS);
+        }
 
         $id = User::create($user)->id;
 
@@ -58,23 +63,31 @@ class UserController extends Controller
     {
         $user = User::findOrFail($args['id']);
 
-        $user->update(
-            $this->validate($request, [
-                'email' => v::optional(
-                    v::uniqueField(User::class, 'email', $user->email)->email()
-                ),
+        $inputs = $this->validate($request, [
+            'email' => v::optional(
+                v::uniqueField(User::class, 'email', $user->email)->email()
+            ),
 
-                'password' => v::optional(
-                    v::length(6)
-                )->setName('senha'),
+            'password' => v::optional(
+                v::length(6)
+            )->setName('senha'),
 
-                'type' => v::optional(
-                    v::in(['admin', 'normal'])
-                )->setName('tipo')
-            ], [
-                'password.length' => 'O campo senha precisa ter no mínimo 6 caracteres.'
-            ])
-        );    
+            'type' => v::optional(
+                v::in(['admin', 'normal'])
+            )->setName('tipo'),
+
+            'avatar' => v::optional(
+                v::uploaded()->image()
+            )
+        ], [
+            'password.length' => 'O campo senha precisa ter no mínimo 6 caracteres.'
+        ]);
+
+        if (isset($inputs['avatar'])) {
+            $inputs['avatar'] = moveUploadedFile($inputs['avatar'], PATH_AVATARS);
+        }
+
+        $user->update($inputs);
 
         return $response->withRedirect(admin_url("/users/{$user->id}/edit"));
     }
@@ -85,7 +98,7 @@ class UserController extends Controller
 
         if ($user->id == $this->auth->user()->id) {
             return $response->withStatus(403);
-        }   
+        }
 
         $user->delete();
 

@@ -1,7 +1,7 @@
 {% extends 'layouts/admin.twig' %}
 
 {% block content %}
-    <form method="POST" class="col-md-8" action="./">
+    <form method="POST" class="col-md-8" action="./" enctype="multipart/form-data">
         {{ method(user is defined ? 'PUT' : 'POST') }}
         {{ csrf_token() }}
 
@@ -69,6 +69,16 @@
                 </option>
             </select>
             <span class="error invalid-feedback">{{ error('type') }}</span>
+        </div>
+
+        <!-- Avatar -->
+        <div class="form-group">
+            <label for="avatar" class="d-block">Avatar</label>
+            {% if user %}
+                <img src="{{ user.avatar_url }}" width="100" height="100" class="d-block user-image mb-3">
+            {% endif %}
+            <input type="file" name="avatar" id="avatar" class="{{ is_invalid('avatar') }}" />
+            <span class="error invalid-feedback">{{ error('avatar') }}</span>
         </div>
 
         <input type="submit" class="btn-primary btn" value="Salvar" />

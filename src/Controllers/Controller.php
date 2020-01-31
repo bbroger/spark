@@ -59,7 +59,7 @@ class Controller
             throw new ValidationException($errors, $inputs);
         }
 
-        return array_filter(array_merge($input->getParams(), $inputs), function ($value) {
+        return array_filter(array_merge($inputs, $input->getParams(), $input->getUploadedFiles()), function ($value) {
             return $value != '' && $value != null;
         });
     }

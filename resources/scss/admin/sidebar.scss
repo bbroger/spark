@@ -1,3 +1,8 @@
 .sidebar-collapse .no-logo {
     display: none;
 }
+
+.menu-opened > .nav-link {
+    background-color: #007bff !important;
+    color: #fff;
+}

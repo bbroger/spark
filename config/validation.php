@@ -14,6 +14,8 @@ return [
         'email' => 'O campo {{name}} precisa ter um e-mail válido.',
         'length' => 'O campo {{name}} precisa ter um tamanho entre {{minValue}} e {{maxValue}}.',
         'uniqueField' => 'O valor do campo {{name}} já está sendo utilizado.',
+        'uploaded' => 'O campo {{name}} precisa conter um arquivo.',
+        'image' => 'O campo {{name}} precisa conter uma imagem.',
 
         /**
          * Default custom messages for attributes.

@@ -14,7 +14,7 @@ class User extends Model
     public function getAvatarUrlAttribute()
     {
         return $this->avatar
-            ? /* TODO: Add storage link */ null
+            ? url(FOLDER_AVATARS . '/' . $this->avatar)
             : get_gravatar($this->email);
     }
 

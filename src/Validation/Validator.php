@@ -4,6 +4,7 @@ namespace App\Validation;
 
 use Awurth\SlimValidation\Configuration;
 use Awurth\SlimValidation\Validator as BaseValidator;
+use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 
 class Validator extends BaseValidator
@@ -64,5 +65,14 @@ class Validator extends BaseValidator
         }
 
         return $this->setValue($config->getKey(), $input, $config->getGroup());
+    }
+
+    public function getRequestParam(ServerRequestInterface $request, $key, $default = null)
+    {
+        if (isset($_FILES[$key])) {
+            return $_FILES[$key]['tmp_name'];
+        }
+
+        return parent::getRequestParam($request, $key, $default);
     }
 }

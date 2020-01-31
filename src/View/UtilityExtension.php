@@ -60,6 +60,6 @@ class UtilityExtension extends AbstractExtension implements GlobalsInterface
             $route = '/admin' . $route;
         }
 
-        return Str::startsWith($path, $route) ? 'menu-open' : null;
+        return Str::startsWith($path, $route) ? 'menu-open menu-opened' : null;
     }
 }
