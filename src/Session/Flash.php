@@ -13,6 +13,11 @@ class Flash extends Messages
         return $this;
     }
 
+    public function success($message)
+    {
+        return $this->put('success', $message);
+    }
+
     public function getStorage()
     {
         return $this->storage;

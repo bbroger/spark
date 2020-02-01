@@ -122,11 +122,21 @@ function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts 
     return $url;
 }
 
-function app_logo()
+function storage_url($file)
 {
-    return setting('app.logo');
+    return url(
+        FOLDER_STORAGE . $file
+    );
 }
 
+function app_logo()
+{
+    $logo = setting('app.logo');
+
+    return $logo
+        ? url(FOLDER_UPLOADED_IMAGES . '/' . $logo)
+        : $logo;
+}
 
 function arr_only($keys)
 {

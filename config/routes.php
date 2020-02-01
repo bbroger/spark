@@ -43,6 +43,14 @@ $app->group('/admin', function ($group) {
         $group->get('/about', Admin\AboutController::class . ':index');
 
         /**
+         * Settings.
+         */
+        $group->group('/settings', function ($group) {
+            $group->get('', Admin\SettingController::class .  ':index');
+            $group->post('', Admin\SettingController::class .  ':update');
+        });
+
+        /**
          * Users
          */
         $group->group('/users', function ($group) {

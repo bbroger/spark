@@ -5,7 +5,6 @@ namespace App\Controllers\Admin;
 use App\Controllers\Controller;
 use App\Models\User;
 use Respect\Validation\Validator as v;
-use Slim\Exception\HttpNotFoundException;
 
 class UserController extends Controller
 {
@@ -40,11 +39,15 @@ class UserController extends Controller
             'password.length' => 'O campo senha precisa ter no mínimo 6 caracteres.'
         ]);
 
-        if (isset($user['avatar'])) {
-            $user['avatar'] = moveUploadedFile($user['avatar'], PATH_AVATARS);
+        if (isset($user['avatar']) && $user['avatar']->getError() == UPLOAD_ERR_OK) {
+            $user['avatar'] = moveUploadedFile($user['avatar'], PATH_UPLOADED_IMAGES);
+        } else {
+            unset($user['avatar']);
         }
 
         $id = User::create($user)->id;
+
+        $this->flash->success('Este usuário foi criado com sucesso.');
 
         return $response->withRedirect(admin_url("/users/{$id}/edit"));
     }
@@ -83,11 +86,15 @@ class UserController extends Controller
             'password.length' => 'O campo senha precisa ter no mínimo 6 caracteres.'
         ]);
 
-        if (isset($inputs['avatar'])) {
-            $inputs['avatar'] = moveUploadedFile($inputs['avatar'], PATH_AVATARS);
+        if (isset($inputs['avatar']) && $inputs['avatar']->getError() == UPLOAD_ERR_OK) {
+            $inputs['avatar'] = moveUploadedFile($inputs['avatar'], PATH_UPLOADED_IMAGES);
+        } else {
+            unset($inputs['avatar']);
         }
 
         $user->update($inputs);
+
+        $this->flash->success('As informações deste usuário foram salvadas com sucesso.');
 
         return $response->withRedirect(admin_url("/users/{$user->id}/edit"));
     }

@@ -22,6 +22,10 @@
             rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.10.2/css/OverlayScrollbars.min.css"
         />
+        <link
+            rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+        />
 
         <!-- Scripts -->
         <script
@@ -85,7 +89,7 @@
                     class="brand-link {{ app_logo() ? '' : 'no-logo' }}"
                 >
                     {% if app_logo() %}
-                        <img src="{{ app_logo() }}" width="40" height="40">
+                        <img src="{{ app_logo() }}" width="40" height="40" style="border-radius: 4px">
                     {% endif %}
 
                     <span class="brand-text font-weight-light">{{ app_name() }}</span>
@@ -149,6 +153,14 @@
                                         </a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ admin_url('/settings') }}" class="nav-link {{ is_active('/settings') }}">
+                                    <i class="nav-icon fas fa-cogs"></i>
+                                    <p>
+                                        Configurações
+                                    </p>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ admin_url('/about') }}" class="nav-link {{ is_active('/about') }}">
@@ -223,6 +235,7 @@
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.10.2/js/jquery.overlayScrollbars.min.js"></script>
         <script src="{{ asset_js('admin.js') }}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script type="text/javascript">
             $.ajaxSetup({
               data: {
@@ -230,6 +243,10 @@
                 '{{ csrf.keys.value }}': '{{ csrf.value }}',
               }
             });
+
+            {% if flash.has('success') %}
+                toastr.success('{{ flash.get('success') }}');
+            {% endif %}
         </script>
     </body>
 </html>

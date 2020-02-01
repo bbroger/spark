@@ -1,0 +1,67 @@
+{% extends 'layouts/admin.twig' %}
+
+{% set title = 'Configurações' %}
+
+{% block content %}
+    <form method="POST" class="col-md-8" enctype="multipart/form-data">
+        {{ csrf_token() }}
+
+        <!-- App Name -->
+        <div class="form-group">
+            <label for="app_name">Nome do site</label>
+            <input 
+                type="text" 
+                name="app_name" 
+                id="app_name" 
+                class="form-control {{ is_invalid('app_name') }}" 
+                value="{{ old('app_name', setting('app.name')) }}"
+            />
+            <span class="error invalid-feedback">{{ error('app_name') }}</span>
+        </div>
+
+        <!-- App URL -->
+        <div class="form-group">
+            <label for="app_url">URL do site</label>
+            <input 
+                type="text" 
+                name="app_url" 
+                id="app_url" 
+                class="form-control {{ is_invalid('app_url') }}" 
+                value="{{ old('app_url', setting('app.url')) }}"
+            />
+            <span class="error invalid-feedback">{{ error('app_url') }}</span>
+        </div>
+        
+        <!-- App Logo -->
+        <div class="form-group">
+            <label for="app_logo">Logo do site</label>
+
+            {% if setting('app.logo') %}
+                <img src="{{ app_logo() }}" width="80" height="80" style="border-radius: 4px" class="d-block mb-2">
+            {% endif %}
+
+            <input 
+                type="file" 
+                name="app_logo" 
+                id="app_logo" 
+                class="d-block {{ is_invalid('app_logo') }}" 
+            />
+            <span class="error invalid-feedback">{{ error('app_logo') }}</span>
+        </div>
+
+        <!-- FontAwesome Kit -->
+        <div class="form-group">
+            <label for="font-awesome_kit">URL do kit do FontAwesome</label>
+            <input 
+                type="text" 
+                name="font-awesome_kit" 
+                id="font-awesome_kit" 
+                class="form-control {{ is_invalid('font-awesome_kit') }}" 
+                value="{{ old('font-awesome_kit', setting('font-awesome.kit')) }}"
+            />
+            <span class="error invalid-feedback">{{ error('font-awesome_kit') }}</span>
+        </div>
+
+        <input type="submit" class="btn-primary btn" value="Salvar" />
+    </form>
+{% endblock %}
